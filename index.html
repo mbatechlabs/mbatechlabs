@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MBA Tech Labs — Quran Word Puzzle</title>
+  <meta name="description" content="MBA Tech Labs builds meaningful mobile experiences. Quran Word Puzzle helps you memorize the Holy Quran through fun word puzzles in Arabic, English & Urdu." />
+  <style>
+    :root{
+      --green:#0F4D3A; --green-dark:#0A3A2C; --green-deep:#093124;
+      --mint:#A7F3D0; --gold:#C9A06A; --gold-dark:#A07A48;
+      --cream:#FAF6EC; --cream-2:#F3ECDA; --surface:#FFFFFF;
+      --text:#1A1815; --muted:#6B6457; --border:#E8DFC9;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);background:var(--cream);line-height:1.65;-webkit-font-smoothing:antialiased;
+    }
+    a{color:var(--green);text-decoration:none}
+    .container{max-width:1080px;margin:0 auto;padding:0 22px}
+    .btn{
+      display:inline-flex;align-items:center;gap:9px;padding:14px 26px;border-radius:999px;
+      font-weight:700;font-size:15px;transition:transform .15s ease, box-shadow .15s ease;cursor:pointer;border:none;
+    }
+    .btn-primary{background:var(--mint);color:var(--green-dark);box-shadow:0 8px 22px rgba(0,0,0,.18)}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,0,0,.24)}
+    .btn-ghost{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.35)}
+    .btn-ghost:hover{background:rgba(255,255,255,.2)}
+
+    /* NAV */
+    nav{
+      position:sticky;top:0;z-index:50;background:rgba(250,246,236,.85);
+      backdrop-filter:saturate(160%) blur(12px);border-bottom:1px solid var(--border);
+    }
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.3px}
+    .brand .logo{
+      width:34px;height:34px;border-radius:9px;display:grid;place-items:center;
+      background:linear-gradient(135deg,var(--green),var(--green-dark));color:var(--mint);font-weight:900;font-size:15px;
+    }
+    .nav-links{display:flex;gap:26px}
+    .nav-links a{color:var(--muted);font-weight:600;font-size:14px}
+    .nav-links a:hover{color:var(--green)}
+    @media(max-width:640px){.nav-links{display:none}}
+
+    /* HERO */
+    .hero{
+      position:relative;overflow:hidden;color:#fff;text-align:center;
+      background:linear-gradient(140deg,var(--green) 0%,var(--green-dark) 55%,var(--green-deep) 100%);
+      padding:84px 22px 96px;
+    }
+    .hero::before,.hero::after{content:"";position:absolute;border-radius:50%;opacity:.10;background:var(--mint)}
+    .hero::before{width:380px;height:380px;top:-140px;right:-90px}
+    .hero::after{width:240px;height:240px;bottom:-110px;left:-70px;opacity:.06;background:#fff}
+    .eyebrow{display:inline-block;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--mint);font-weight:700;margin-bottom:14px}
+    .hero h1{font-size:clamp(30px,6vw,52px);line-height:1.08;letter-spacing:-1px;margin-bottom:16px}
+    .hero p.lead{max-width:620px;margin:0 auto 28px;font-size:18px;opacity:.9}
+    .hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+    /* APP SHOWCASE */
+    .section{padding:74px 0}
+    .section h2{font-size:clamp(24px,4vw,34px);letter-spacing:-.5px;color:var(--green);text-align:center}
+    .section .sub{text-align:center;color:var(--muted);max-width:620px;margin:12px auto 0}
+
+    .app-card{
+      margin-top:44px;display:grid;grid-template-columns:auto 1fr;gap:34px;align-items:center;
+      background:var(--surface);border:1px solid var(--border);border-radius:26px;padding:34px;
+      box-shadow:0 20px 50px rgba(15,77,58,.08);
+    }
+    .app-card .icon{width:128px;height:128px;border-radius:30px;box-shadow:0 14px 32px rgba(0,0,0,.18)}
+    .app-card h3{font-size:26px;letter-spacing:-.4px;margin-bottom:4px}
+    .app-card .ar{color:var(--gold-dark);font-size:18px;margin-bottom:12px}
+    .app-card p{color:var(--muted);margin-bottom:18px}
+    .play-btn{
+      display:inline-flex;align-items:center;gap:10px;background:var(--green);color:#fff;
+      padding:12px 22px;border-radius:12px;font-weight:700;transition:transform .15s,box-shadow .15s;
+    }
+    .play-btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(15,77,58,.3)}
+    @media(max-width:640px){.app-card{grid-template-columns:1fr;text-align:center;justify-items:center}}
+
+    /* FEATURES */
+    .alt{background:var(--cream-2)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:42px}
+    .feature{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:24px;transition:transform .18s,box-shadow .18s}
+    .feature:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(15,77,58,.1)}
+    .feature .fi{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;font-size:22px;margin-bottom:14px;background:rgba(167,243,208,.35)}
+    .feature h4{font-size:17px;margin-bottom:6px}
+    .feature p{color:var(--muted);font-size:14px}
+
+    /* MODES */
+    .modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:42px}
+    .mode{border-radius:20px;padding:28px;color:#fff;background:linear-gradient(135deg,var(--green),var(--green-dark))}
+    .mode:nth-child(2){background:linear-gradient(135deg,#1F6B53,#0F4D3A)}
+    .mode:nth-child(3){background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#2a1f10}
+    .mode .badge{display:inline-block;font-size:12px;letter-spacing:1px;text-transform:uppercase;opacity:.85;margin-bottom:10px;font-weight:700}
+    .mode h4{font-size:21px;margin-bottom:8px}
+    .mode p{opacity:.92;font-size:14.5px}
+
+    /* LANGUAGES */
+    .langs{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:40px}
+    .lang{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px 26px;font-weight:700;text-align:center;min-width:150px}
+    .lang span{display:block;color:var(--muted);font-weight:500;font-size:13px;margin-top:2px}
+
+    /* CTA */
+    .cta{background:linear-gradient(140deg,var(--green),var(--green-deep));color:#fff;text-align:center;border-radius:28px;padding:54px 26px;margin:0 22px}
+    .cta h2{color:#fff}
+    .cta p{opacity:.9;max-width:520px;margin:12px auto 26px}
+
+    /* FOOTER */
+    footer{background:#0c1611;color:#cfc7b0;padding:46px 22px 30px;margin-top:74px}
+    .foot-grid{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-start}
+    footer .brand{color:#fff}
+    footer .brand .logo{background:linear-gradient(135deg,var(--mint),#5fe0ad);color:var(--green-dark)}
+    footer a{color:var(--mint)}
+    .foot-links{display:flex;gap:22px;flex-wrap:wrap}
+    .copyright{border-top:1px solid rgba(255,255,255,.1);margin-top:28px;padding-top:18px;font-size:13px;opacity:.7;text-align:center}
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container nav-inner">
+      <div class="brand"><div class="logo">M</div> MBA Tech Labs</div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#app">App</a>
+        <a href="#features">Features</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container">
+      <span class="eyebrow">MBA Tech Labs</span>
+      <h1>We craft meaningful<br/>mobile experiences</h1>
+      <p class="lead">Independent studio building thoughtful, beautifully designed apps. Our flagship app, <strong>Quran Word Puzzle</strong>, makes learning the Holy Quran fun for everyone.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.mba.quranpuzzle" target="_blank" rel="noopener">▶ Get it on Google Play</a>
+        <a class="btn btn-ghost" href="#app">Explore the app</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="container">
+      <h2>About MBA Tech Labs</h2>
+      <p class="sub">MBA Tech Labs is a mobile app studio focused on clean design, delightful experiences, and apps that add real value to people's lives. We believe technology should be simple, beautiful, and purposeful.</p>
+    </div>
+  </section>
+
+  <!-- APP SHOWCASE -->
+  <section class="section alt" id="app">
+    <div class="container">
+      <h2>Our Flagship App</h2>
+      <p class="sub">Memorize verses of the Holy Quran through engaging word puzzles.</p>
+
+      <div class="app-card">
+        <img class="icon" src="icon.png" alt="Quran Word Puzzle icon" />
+        <div>
+          <h3>Quran Word Puzzle</h3>
+          <div class="ar">لغز كلمات القرآن</div>
+          <p>A fun, beautifully designed game that turns Quran memorization into a daily 5-minute habit. Play real Quranic verses with translations across three puzzle modes, compete on a global leaderboard, and learn Arabic along the way — completely free.</p>
+          <a class="play-btn" href="https://play.google.com/store/apps/details?id=com.mba.quranpuzzle" target="_blank" rel="noopener">▶ Download on Google Play</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section" id="features">
+    <div class="container">
+      <h2>Features</h2>
+      <p class="sub">Everything you need to make Quran learning beautiful, simple, and rewarding.</p>
+      <div class="grid">
+        <div class="feature"><div class="fi">🧩</div><h4>Three Game Modes</h4><p>Words, Choice, and Cipher — each a different way to learn.</p></div>
+        <div class="feature"><div class="fi">🌍</div><h4>Trilingual</h4><p>Arabic, English & Urdu with full right-to-left support.</p></div>
+        <div class="feature"><div class="fi">📖</div><h4>100+ Verses</h4><p>Hand-picked Quranic verses with translations.</p></div>
+        <div class="feature"><div class="fi">🏆</div><h4>Global Leaderboard</h4><p>Compete worldwide via Google Play Games.</p></div>
+        <div class="feature"><div class="fi">🌙</div><h4>Daily Challenge</h4><p>A fresh verse to solve every single day.</p></div>
+        <div class="feature"><div class="fi">⭐</div><h4>Stars & Streaks</h4><p>Earn star ratings and keep your streak alive.</p></div>
+        <div class="feature"><div class="fi">🎨</div><h4>Light & Dark</h4><p>A polished theme for day and night.</p></div>
+        <div class="feature"><div class="fi">📶</div><h4>Plays Offline</h4><p>No internet needed once installed. Free forever.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODES -->
+  <section class="section alt">
+    <div class="container">
+      <h2>Three Ways to Play</h2>
+      <p class="sub">Same verses, different challenge — switch anytime.</p>
+      <div class="modes">
+        <div class="mode"><span class="badge">Mode 01</span><h4>Words</h4><p>Type the missing Arabic letters of each blanked word in the verse.</p></div>
+        <div class="mode"><span class="badge">Mode 02</span><h4>Choice</h4><p>Tap the correct word from a set of options to complete the verse.</p></div>
+        <div class="mode"><span class="badge">Mode 03</span><h4>Cipher</h4><p>Decode each letter from its number key — like a Quran word search, smarter.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LANGUAGES -->
+  <section class="section">
+    <div class="container">
+      <h2>Built for Everyone</h2>
+      <p class="sub">Play and learn in your language.</p>
+      <div class="langs">
+        <div class="lang">العربية<span>Arabic · RTL</span></div>
+        <div class="lang">English<span>Full interface</span></div>
+        <div class="lang">اردو<span>Urdu</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section">
+    <div class="container">
+      <div class="cta">
+        <h2>Start memorizing today</h2>
+        <p>Free forever. No hidden costs. Just a clean, ad-supported Islamic word game built with love for the Muslim ummah.</p>
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.mba.quranpuzzle" target="_blank" rel="noopener">▶ Get Quran Word Puzzle</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div class="container">
+      <div class="foot-grid">
+        <div>
+          <div class="brand"><div class="logo">M</div> MBA Tech Labs</div>
+          <p style="margin-top:10px;max-width:320px;font-size:14px;opacity:.85">Crafting meaningful mobile experiences. Maker of Quran Word Puzzle.</p>
+        </div>
+        <div class="foot-links">
+          <a href="#about">About</a>
+          <a href="#app">App</a>
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="mailto:awaisiqbal7985@gmail.com">Contact</a>
+        </div>
+      </div>
+      <div class="copyright">© 2026 MBA Tech Labs. All rights reserved.</div>
+    </div>
+  </footer>
+
+</body>
+</html>

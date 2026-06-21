@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Quran Word Puzzle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E8D48B;
+      --bg-deep: #0C1A1A;
+      --bg-card: #112222;
+      --bg-card-hover: #152a2a;
+      --text-primary: #E8E4DC;
+      --text-secondary: #9BAFA8;
+      --text-muted: #637A73;
+      --accent-teal: #2A7A6E;
+      --border: rgba(201,168,76,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 300;
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      line-height: 1.75;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* --- decorative background --- */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 600px 400px at 20% 10%, rgba(42,122,110,0.12), transparent),
+        radial-gradient(ellipse 500px 500px at 80% 80%, rgba(201,168,76,0.06), transparent);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* --- geometric pattern band --- */
+    .pattern-band {
+      width: 100%;
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--gold) 0px, var(--gold) 12px,
+        transparent 12px, transparent 18px,
+        var(--accent-teal) 18px, var(--accent-teal) 30px,
+        transparent 30px, transparent 36px
+      );
+      opacity: 0.6;
+    }
+
+    /* --- header --- */
+    header {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 4rem 1.5rem 3rem;
+    }
+
+    .app-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, var(--accent-teal), #1a5c53);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Amiri', serif;
+      font-size: 2rem;
+      color: var(--gold-light);
+      margin-bottom: 1.25rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+      border: 1px solid rgba(201,168,76,0.2);
+    }
+
+    header h1 {
+      font-family: 'Amiri', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.02em;
+      margin-bottom: 0.25rem;
+    }
+
+    header .subtitle {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    header .last-updated {
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* --- main content --- */
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 0 1.5rem 5rem;
+    }
+
+    .section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2rem 2rem;
+      margin-bottom: 1.25rem;
+      transition: background 0.3s ease;
+    }
+
+    .section:hover {
+      background: var(--bg-card-hover);
+    }
+
+    .section-number {
+      font-family: 'Amiri', serif;
+      font-size: 0.8rem;
+      color: var(--gold);
+      opacity: 0.7;
+      display: block;
+      margin-bottom: 0.35rem;
+      letter-spacing: 0.1em;
+    }
+
+    .section h2 {
+      font-family: 'Amiri', serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      margin-bottom: 0.85rem;
+    }
+
+    .section p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .section p:last-child {
+      margin-bottom: 0;
+    }
+
+    .section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0.5rem 0;
+    }
+
+    .section ul li {
+      position: relative;
+      padding-left: 1.4rem;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .section ul li::before {
+      content: '◆';
+      position: absolute;
+      left: 0;
+      color: var(--accent-teal);
+      font-size: 0.55rem;
+      top: 0.55rem;
+    }
+
+    .highlight {
+      color: var(--text-primary);
+      font-weight: 400;
+    }
+
+    a {
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(201,168,76,0.3);
+      transition: border-color 0.2s;
+    }
+
+    a:hover {
+      border-bottom-color: var(--gold);
+    }
+
+    /* --- footer --- */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2rem 1.5rem 3rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    footer .divider {
+      width: 60px;
+      height: 1px;
+      background: var(--border);
+      margin: 0 auto 1rem;
+    }
+
+    /* --- animations --- */
+    .section {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: fadeUp 0.5s ease forwards;
+    }
+    
+    .app-icon-image img {
+        max-width: 100px;
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section:nth-child(1)  { animation-delay: 0.05s; }
+    .section:nth-child(2)  { animation-delay: 0.1s; }
+    .section:nth-child(3)  { animation-delay: 0.15s; }
+    .section:nth-child(4)  { animation-delay: 0.2s; }
+    .section:nth-child(5)  { animation-delay: 0.25s; }
+    .section:nth-child(6)  { animation-delay: 0.3s; }
+    .section:nth-child(7)  { animation-delay: 0.35s; }
+    .section:nth-child(8)  { animation-delay: 0.4s; }
+    .section:nth-child(9)  { animation-delay: 0.45s; }
+    .section:nth-child(10) { animation-delay: 0.5s; }
+
+    /* --- responsive --- */
+    @media (max-width: 600px) {
+      .section { padding: 1.5rem 1.25rem; }
+      header { padding: 3rem 1.25rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="pattern-band"></div>
+
+<header>
+  <div class="app-icon-image">
+      <img src="app-icon.png" />
+  </div>
+  <h1>Quran Word Puzzle</h1>
+  <p class="subtitle">Privacy Policy</p>
+  <p class="last-updated" style="display: none !important;">Last updated: April 20, 2026</p>
+</header>
+
+<main>
+
+  <div class="section">
+    <span class="section-number">01</span>
+    <h2>Introduction</h2>
+    <p>Welcome to <span class="highlight">Quran Word Puzzle</span>. We respect your privacy and are committed to protecting any personal data you share with us. This Privacy Policy explains what information we collect, how we use it, and your rights regarding that data.</p>
+    <p>By using Quran Word Puzzle, you agree to the practices described in this policy.</p>
+  </div>
+
+  <div class="section">
+    <span class="section-number">02</span>
+    <h2>Information We Collect</h2>
+    <p>We may collect the following types of information:</p>
+    <ul>
+      <li><span class="highlight">Google Play Games Data:</span> If you sign in with Google Play Games for leaderboard functionality, we receive your display name, profile picture, and player ID as provided by Google.</li>
+      <li><span class="highlight">Leaderboard & Score Data:</span> Your game scores and rankings are stored to maintain the global leaderboard.</li>
+      <li><span class="highlight">Device Information:</span> Basic device details such as device model, operating system version, and language settings may be collected for app performance and compatibility purposes.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <span class="section-number">03</span>
+    <h2>How We Use Your Information</h2>
+    <p>The information we collect is used solely for the following purposes:</p>
+    <ul>
+      <li>Displaying your scores on the in-app leaderboard</li>
+      <li>Improving the app's performance and user experience</li>
+      <li>Fixing bugs and ensuring compatibility across devices</li>
+    </ul>
+    <p>We do <span class="highlight">not</span> use your data for advertising, profiling, or selling to third parties.</p>
+  </div>
+
+  <div class="section">
+    <span class="section-number">04</span>
+    <h2>Third-Party Services</h2>
+    <p>Quran Word Puzzle integrates with the following third-party services:</p>
+    <ul>
+      <li><span class="highlight">Google Play Games Services</span> — for sign-in, leaderboards, and achievements. Google's own privacy policy governs how they handle your data: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></li>
+    </ul>
+    <p>We encourage you to review the privacy policies of any third-party services you interact with.</p>
+  </div>
+
+  <div class="section">
+    <span class="section-number">05</span>
+    <h2>Data Storage & Security</h2>
+    <p>Your leaderboard data is stored securely. We implement reasonable technical and organizational measures to protect your data from unauthorized access, loss, or misuse.</p>
+    <p>However, no method of transmission or storage is 100% secure. While we strive to protect your information, we cannot guarantee absolute security.</p>
+  </div>
+
+  <div class="section">
+    <span class="section-number">06</span>
+    <h2>Children's Privacy</h2>
+    <p>Quran Word Puzzle is designed to be family-friendly and suitable for all ages. We do <span class="highlight">not</span> knowingly collect personal information from children under the age of 13 without parental consent.</p>
+    <p>If you believe a child has provided us with personal data, please contact us so we can promptly remove it.</p>
+  </div>
+
+  <div class="section">
+    <span class="section-number">07</span>
+    <h2>Your Rights</h2>
+    <p>You have the right to:</p>
+    <ul>
+      <li>Request access to the personal data we hold about you</li>
+      <li>Request deletion of your data from our systems</li>
+      <li>Opt out of leaderboard features by not signing in to Google Play Games</li>
+    </ul>
+    <p>To exercise any of these rights, please contact us using the details below.</p>
+  </div>
+
+  <div class="section">
+    <span class="section-number">08</span>
+    <h2>Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with a revised "Last updated" date. We encourage you to review this policy periodically.</p>
+  </div>
+
+  <div class="section">
+    <span class="section-number">09</span>
+    <h2>Contact Us</h2>
+    <p>If you have any questions, concerns, or requests regarding this Privacy Policy, feel free to reach out:</p>
+    <p><span class="highlight">Email:</span> <a href="mailto:mbatechlabs@gmail.com">mbatechlabs@gmail.com</a></p>
+    <p>We will respond to your inquiry as promptly as possible.</p>
+  </div>
+
+</main>
+
+<footer>
+  <div class="divider"></div>
+  <p>© 2026 Quran Word Puzzle. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
